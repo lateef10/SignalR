@@ -6,11 +6,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CustomLoggerService } from './services/custom-logger.service';
+import { HubmethodComponent } from './hubmethod/hubmethod.component';
+import { GroupsComponent } from './groups/groups.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    HubmethodComponent,
+    GroupsComponent
   ],
   imports: [
     BrowserModule,

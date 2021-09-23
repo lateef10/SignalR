@@ -15,33 +15,39 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     //this.http.get("https://localhost:44347/WeatherForecast").subscribe(data=>{console.log(data)});
 
-// create connection
-let connection = new signalR.HubConnectionBuilder()
-                  //.configureLogging(signalR.LogLevel.Trace)
-                  .configureLogging(new CustomLoggerService())
-                  .withUrl("https://localhost:44347/viewhub").build();
+    // create connection
+    let connection = new signalR.HubConnectionBuilder()
+                      //.configureLogging(signalR.LogLevel.Trace)
+                      .configureLogging(new CustomLoggerService())
+                      .withUrl("https://localhost:44347/viewhub").build();
 
-// on view update message from client
-connection.on("viewCountUpdate", (value: number) => {
-    let counter = <HTMLVideoElement>document.getElementById("viewCounter");
-    counter.innerText = value.toString();
+
+  //this is for button click event
+  let btn = <HTMLButtonElement>document.getElementById("incrementView");
+  btn.addEventListener("click", function (evt) {
+    // send to hub
+    connection.invoke("notifyWatching");
 });
 
-// notify server we're watching
-function notify(){
-    connection.send("notifyWatching");
-}
+    // on view update message from client
+    connection.on("viewCountUpdate", (value: number) => {
+        let counter = <HTMLSpanElement>document.getElementById("viewCounter");
+        counter.innerText = value.toString();
+    });
 
-// start the connection
-function startSuccess(){
-    console.log("Connected.");
-    notify();
-}
-function startFail(){
-    console.log("Connection failed.");
-}
 
-connection.start().then(startSuccess, startFail);
+    // start the connection
+    function startSuccess(){
+        console.log("Connected.");
+        connection.send("notifyWatching");
+
+        connection.invoke("notifyWatching"); //this is for button click event
+    }
+    function startFail(){
+        console.log("Connection failed.");
+    }
+
+    connection.start().then(startSuccess, startFail);
   }
 
 }

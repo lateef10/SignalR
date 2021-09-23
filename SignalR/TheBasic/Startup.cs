@@ -67,6 +67,8 @@ namespace TheBasic
             {
                 //endpoints.MapControllers();
                 endpoints.MapHub<ViewHub>("/viewhub");
+                endpoints.MapHub<StringToolsHub>("/stringtoolshub");
+                endpoints.MapHub<ColorHub>("/colorhub");
             });
         }
     }
