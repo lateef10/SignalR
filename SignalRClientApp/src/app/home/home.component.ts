@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import * as signalR from "@microsoft/signalr";
+import { CustomLoggerService } from '../services/custom-logger.service';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,10 @@ export class HomeComponent implements OnInit {
     //this.http.get("https://localhost:44347/WeatherForecast").subscribe(data=>{console.log(data)});
 
 // create connection
-let connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:44347/viewhub").build();
+let connection = new signalR.HubConnectionBuilder()
+                  //.configureLogging(signalR.LogLevel.Trace)
+                  .configureLogging(new CustomLoggerService())
+                  .withUrl("https://localhost:44347/viewhub").build();
 
 // on view update message from client
 connection.on("viewCountUpdate", (value: number) => {
