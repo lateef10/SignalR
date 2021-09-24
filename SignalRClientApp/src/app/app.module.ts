@@ -8,13 +8,15 @@ import { HomeComponent } from './home/home.component';
 import { CustomLoggerService } from './services/custom-logger.service';
 import { HubmethodComponent } from './hubmethod/hubmethod.component';
 import { GroupsComponent } from './groups/groups.component';
+import { VoteOutsideHubComponent } from './vote-outside-hub/vote-outside-hub.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     HubmethodComponent,
-    GroupsComponent
+    GroupsComponent,
+    VoteOutsideHubComponent
   ],
   imports: [
     BrowserModule,

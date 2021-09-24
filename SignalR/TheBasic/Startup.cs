@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TheBasic.Hubs;
+using TheBasic.Services;
 
 namespace TheBasic
 {
@@ -27,6 +28,8 @@ namespace TheBasic
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IVoteManager, VoteManager>();
+
             services.AddCors(o => o.AddPolicy("AllowAnyOriginPolicy", builder =>
             {
                 builder.WithOrigins("http://localhost:4200")
@@ -65,10 +68,11 @@ namespace TheBasic
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllers();
+                endpoints.MapControllers();
                 endpoints.MapHub<ViewHub>("/viewhub");
                 endpoints.MapHub<StringToolsHub>("/stringtoolshub");
                 endpoints.MapHub<ColorHub>("/colorhub");
+                endpoints.MapHub<VoteHub>("/votehub");
             });
         }
     }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';   
 import * as signalR from "@microsoft/signalr";
+import { CustomRetryPolicyService } from '../services/custom-retry-policy.service';
 
 @Component({
   selector: 'app-groups',
@@ -21,6 +22,7 @@ export class GroupsComponent implements OnInit {
     // create connection
     let connection = new signalR.HubConnectionBuilder()
         .withUrl("https://localhost:44347/colorhub")
+        .withAutomaticReconnect(new CustomRetryPolicyService())
         .build();
 
     btnJoinYellow.addEventListener("click", () => { connection.invoke("JoinGroup", "Yellow"); });

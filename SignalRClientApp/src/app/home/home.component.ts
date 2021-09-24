@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import * as signalR from "@microsoft/signalr";
 import { CustomLoggerService } from '../services/custom-logger.service';
+import { CustomRetryPolicyService } from '../services/custom-retry-policy.service';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
     let connection = new signalR.HubConnectionBuilder()
                       //.configureLogging(signalR.LogLevel.Trace)
                       .configureLogging(new CustomLoggerService())
+                      .withAutomaticReconnect(new CustomRetryPolicyService())
                       .withUrl("https://localhost:44347/viewhub").build();
 
 

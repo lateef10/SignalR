@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as signalR from "@microsoft/signalr";
+import { CustomRetryPolicyService } from '../services/custom-retry-policy.service';
 
 @Component({
   selector: 'app-hubmethod',
@@ -16,6 +17,7 @@ export class HubmethodComponent implements OnInit {
     // create connection
     let connection = new signalR.HubConnectionBuilder()
         .withUrl("https://localhost:44347/stringtoolshub")
+        .withAutomaticReconnect(new CustomRetryPolicyService())
         .build();
 
     btn.addEventListener("click", function (evt) {
