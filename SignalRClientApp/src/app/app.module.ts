@@ -9,6 +9,8 @@ import { CustomLoggerService } from './services/custom-logger.service';
 import { HubmethodComponent } from './hubmethod/hubmethod.component';
 import { GroupsComponent } from './groups/groups.component';
 import { VoteOutsideHubComponent } from './vote-outside-hub/vote-outside-hub.component';
+import { ClientConnectionEventComponent } from './client-connection-event/client-connection-event.component';
+import { ServerConnectionEventComponent } from './server-connection-event/server-connection-event.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { VoteOutsideHubComponent } from './vote-outside-hub/vote-outside-hub.com
     HomeComponent,
     HubmethodComponent,
     GroupsComponent,
-    VoteOutsideHubComponent
+    VoteOutsideHubComponent,
+    ClientConnectionEventComponent,
+    ServerConnectionEventComponent
   ],
   imports: [
     BrowserModule,

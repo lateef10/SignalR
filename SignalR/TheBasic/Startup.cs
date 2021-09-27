@@ -73,6 +73,7 @@ namespace TheBasic
                 endpoints.MapHub<StringToolsHub>("/stringtoolshub");
                 endpoints.MapHub<ColorHub>("/colorhub");
                 endpoints.MapHub<VoteHub>("/votehub");
+                endpoints.MapHub<ServerConnEventHub>("/serverconn");
             });
         }
     }
