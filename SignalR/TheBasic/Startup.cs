@@ -38,7 +38,11 @@ namespace TheBasic
                        .AllowCredentials();
             }));
 
-            services.AddSignalR();
+            //You can use just AddSignalR....Redis was added for scaling to multiple server
+            //while SignalR distributes the messages to the servers
+            //you can run this application on multiple server using "dotnet run --urls=localhost:44348
+            //to see the action on Angular homepage and clientconn page.
+            services.AddSignalR().AddStackExchangeRedis("localhost:30001");
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -73,7 +77,8 @@ namespace TheBasic
                 endpoints.MapHub<StringToolsHub>("/stringtoolshub");
                 endpoints.MapHub<ColorHub>("/colorhub");
                 endpoints.MapHub<VoteHub>("/votehub");
-                endpoints.MapHub<ServerConnEventHub>("/serverconn");
+                endpoints.MapHub<ServerConnEventHub>("/serverconnhub");
+                endpoints.MapHub<StronglyTypedHub>("/stronglytypedhub");
             });
         }
     }

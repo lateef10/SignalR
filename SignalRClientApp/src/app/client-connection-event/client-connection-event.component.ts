@@ -16,7 +16,11 @@ export class ClientConnectionEventComponent implements OnInit {
     // create connection
     let connection = new signalR.HubConnectionBuilder()
         .withAutomaticReconnect()
-        .withUrl("https://localhost:44347/viewhub")
+         //this use a different server url, to test multiple server scaling feature
+         //using redis cache to distribute the messages
+         //You can see the result between homepage and this page.
+         //Even though they have different server url, they still return same result to the browser.
+        .withUrl("https://localhost:44348/viewhub")
         .build();
 
     // on view update message from client
