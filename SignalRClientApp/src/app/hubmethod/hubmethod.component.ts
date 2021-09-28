@@ -14,6 +14,9 @@ export class HubmethodComponent implements OnInit {
   ngOnInit(): void {
     let btn = <HTMLButtonElement>document.getElementById("btnGetFullName");
 
+    //You can create multiple connections to different hubs on a page
+    //let newconnection = new signalR.HubConnectionBuilder().withUrl("url").build();
+
     // create connection
     let connection = new signalR.HubConnectionBuilder()
         .withUrl("https://localhost:44347/stringtoolshub")
