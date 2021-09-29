@@ -25,7 +25,6 @@ namespace TheBasic
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IVoteManager, VoteManager>();
@@ -43,6 +42,11 @@ namespace TheBasic
             //you can run this application on multiple server using "dotnet run --urls=localhost:44348
             //to see the action on Angular homepage and clientconn page.
             services.AddSignalR().AddStackExchangeRedis("localhost:30001");
+
+            //Instead of letting your server handles all load to send messages to other servers,
+            //you can use Azure SignalR instead of redis cache. This will act like a gateway
+            //to your servers where messages will be sent and distributed to all your servers.
+            //services.AddSignalR().AddAzureSignalR(connectionStringFromAzureSignalrPortal);
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
